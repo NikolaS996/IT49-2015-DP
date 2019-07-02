@@ -18,7 +18,9 @@ public class CmdAddShape implements Command {
 	@Override
 	public void execute() {
 		model.addShape(shape);
+		System.out.println("Sledi greska:");
 		commandLog = "ADD" + "_EXECUTE_" + shape;
+		System.out.println("Evo greske upravo");
 		System.out.println(shape);
 	}
 

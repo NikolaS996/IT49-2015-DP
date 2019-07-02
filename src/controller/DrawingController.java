@@ -57,12 +57,12 @@ public class DrawingController implements Subject{
 	private DrawingModel model;
 	private DrawingFrame frame;
 
-	private int numberOfSelectedShapes;
+	private int numberOfSelectedShapes = 0;
 
 	private ArrayList<Observer> observers;
 
-	private Stack<Command> undoCommands;
-	private Stack<Command> redoCommands;
+	private Stack<Command> undoCommands = new Stack<Command>();
+	private Stack<Command> redoCommands = new Stack<Command>();
 
 	private DefaultListModel<String> log;
 	private Context context;
@@ -87,9 +87,15 @@ public class DrawingController implements Subject{
 		if (tglBtn != null) {
 			CmdAddShape shape;
 			if (tglBtn.equals("Point")) {
-				Point point = new Point(arg0.getX(), arg0.getY(), frame.getBtnEdgeColor().getBackground());
+				//System.out.println("Jos nije nastupio error 1");
+				Point point = new Point(arg0.getX(), arg0.getY(), frame.getBorderColor());
+				//System.out.println("Jos nije nastupio 2 \\n" + point.toString() + " hehe");
 				shape = new CmdAddShape(point, model);
+				//System.out.println("Jos nista 3");
+				//System.out.println(point.toString());
 				doCommand(shape);
+				System.out.println("Sad je nastupio heh");
+				//frame.getView().repaint();
 				log.addElement(shape.getCommandLog());
 
 			} else if (tglBtn.equals("Line")) {
@@ -98,7 +104,7 @@ public class DrawingController implements Subject{
 					numberOfClicks = 1;
 				} else {
 					Point endingPoint = new Point(arg0.getX(), arg0.getY());
-					Line line = new Line(startingPoint, endingPoint, frame.getBtnEdgeColor().getBackground());
+					Line line = new Line(startingPoint, endingPoint, frame.getBorderColor());
 					numberOfClicks = 0;
 
 					shape = new CmdAddShape(line, model);
@@ -113,7 +119,7 @@ public class DrawingController implements Subject{
 					log.addElement("Adding square canceled");
 				} else {
 					Square square = new Square(new Point(arg0.getX(), arg0.getY()), dlgDrawingSquare.getSideLength(),
-							frame.getBtnEdgeColor().getBackground(), frame.getBtnAreaColor().getBackground());
+							frame.getBorderColor(), frame.getInnerColor());
 
 					shape = new CmdAddShape(square, model);
 					doCommand(shape);
@@ -129,7 +135,7 @@ public class DrawingController implements Subject{
 				} else {
 					Rectangle rectangle = new Rectangle(new Point(arg0.getX(), arg0.getY()),
 							dlgDrawingRectangle.getRectangleHeight(), dlgDrawingRectangle.getRectangleWidth(),
-							frame.getBtnEdgeColor().getBackground(), frame.getBtnAreaColor().getBackground());
+							frame.getBorderColor(), frame.getInnerColor());
 
 					shape = new CmdAddShape(rectangle, model);
 					doCommand(shape);
@@ -143,7 +149,7 @@ public class DrawingController implements Subject{
 					log.addElement("Adding circle canceled");
 				} else {
 					Circle circle = new Circle(dlgDrawingCircle.getR(), new Point(arg0.getX(), arg0.getY()),
-							frame.getBtnEdgeColor().getBackground(), frame.getBtnAreaColor().getBackground());
+							frame.getBorderColor(), frame.getInnerColor());
 
 					shape = new CmdAddShape(circle, model);
 					doCommand(shape);
@@ -158,7 +164,7 @@ public class DrawingController implements Subject{
 				} else {
 					HexagonAdapter hexagonAdapter = new HexagonAdapter(
 							new Hexagon(arg0.getX(), arg0.getY(), dlgDrawingHexagon.getR()),
-							frame.getBtnEdgeColor().getBackground(), frame.getBtnAreaColor().getBackground());
+							frame.getBorderColor(), frame.getInnerColor());
 
 					shape = new CmdAddShape(hexagonAdapter, model);
 					doCommand(shape);
@@ -427,8 +433,10 @@ public class DrawingController implements Subject{
 
 	public void doCommand(Command c) {
 		c.execute();
+		//System.out.println("Da li ce se ovo izvrsiti");
 		undoCommands.push(c);
-		notifyObservers(numberOfSelectedShapes, undoCommands.size(), redoCommands.size());
+		//System.out.println("Hehe" + getNumberOfSelectedShapes());
+		notifyObservers(getNumberOfSelectedShapes(), undoCommands.size(), redoCommands.size());
 	}
 
 	public Color pickColor(Color oldColor) {
@@ -578,6 +586,7 @@ public class DrawingController implements Subject{
 	public void notifyObservers(int selected, int undo, int redo) {
 		Iterator<Observer> it = observers.iterator();
 		while (it.hasNext()) {
+			//System.out.println("Hehe" + selected);
 			it.next().update(frame, model, selected, undo, redo);
 		}
 	}

@@ -98,7 +98,7 @@ public class FileLog implements Strategy {
 
 					if (commandOperation[1].equals("EXECUTE")) {
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdAddShape) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdAddShape) doCommand).getCommandLog());
 
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
@@ -111,7 +111,7 @@ public class FileLog implements Strategy {
 					if (commandOperation[1].equals("EXECUTE")) {
 						doCommand = new CmdDeleteShape(model, deleteShape);
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdDeleteShape) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdDeleteShape) doCommand).getCommandLog());
 
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
@@ -145,7 +145,7 @@ public class FileLog implements Strategy {
 					doCommand = new CmdBringToBack(model.getShapeByIndex(i), model);
 					if (commandOperation[1].equals("EXECUTE")) {
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdBringToBack) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdBringToBack) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -158,7 +158,7 @@ public class FileLog implements Strategy {
 					doCommand = new CmdBringToFront(model.getShapeByIndex(i), model, model.getAllShapes().size() - 1);
 					if (commandOperation[1].equals("EXECUTE")) {
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdBringToFront) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdBringToFront) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -170,7 +170,7 @@ public class FileLog implements Strategy {
 					doCommand = new CmdToBack(model.getShapeByIndex(i), model);
 					if (commandOperation[1].equals("EXECUTE")) {
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdToBack) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdToBack) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -182,7 +182,7 @@ public class FileLog implements Strategy {
 					doCommand = new CmdToFront(model.getShapeByIndex(i), model);
 					if (commandOperation[1].equals("EXECUTE")) {
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdToFront) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdToFront) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -197,9 +197,9 @@ public class FileLog implements Strategy {
 
 					if (commandOperation[1].equals("EXECUTE")) {
 						i = model.getIndexOfShape(oldShape);
-						doCommand = new CmdUpdatePoint((Point) model.getShapeByIndex(i), (Point) newShape);
+						//doCommand = new CmdUpdatePoint((Point) model.getShapeByIndex(i), (Point) newShape);
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdUpdatePoint) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdUpdatePoint) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -214,9 +214,9 @@ public class FileLog implements Strategy {
 
 					if (commandOperation[1].equals("EXECUTE")) {
 						i = model.getIndexOfShape(oldLine);
-						doCommand = new CmdUpdateLine((Line) model.getShapeByIndex(i), (Line) newLine);
+						//doCommand = new CmdUpdateLine((Line) model.getShapeByIndex(i), (Line) newLine);
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdUpdateLine) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdUpdateLine) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -231,9 +231,9 @@ public class FileLog implements Strategy {
 
 					if (commandOperation[1].equals("EXECUTE")) {
 						i = model.getIndexOfShape(oldRec);
-						doCommand = new CmdUpdateRectangle((Rectangle) model.getShapeByIndex(i), (Rectangle) newRec);
+						//doCommand = new CmdUpdateRectangle((Rectangle) model.getShapeByIndex(i), (Rectangle) newRec);
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdUpdateRectangle) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdUpdateRectangle) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -247,9 +247,9 @@ public class FileLog implements Strategy {
 
 					if (commandOperation[1].equals("EXECUTE")) {
 						i = model.getIndexOfShape(oldSquare);
-						doCommand = new CmdUpdateSquare((Square) model.getShapeByIndex(i), (Square) newSquare);
+						//doCommand = new CmdUpdateSquare((Square) model.getShapeByIndex(i), (Square) newSquare);
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdUpdateSquare) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdUpdateSquare) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -263,9 +263,9 @@ public class FileLog implements Strategy {
 
 					if (commandOperation[1].equals("EXECUTE")) {
 						i = model.getIndexOfShape(oldCircle);
-						doCommand = new CmdUpdateCircle((Circle) model.getShapeByIndex(i), (Circle) newCircle);
+						//doCommand = new CmdUpdateCircle((Circle) model.getShapeByIndex(i), (Circle) newCircle);
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdUpdateCircle) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdUpdateCircle) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -279,9 +279,9 @@ public class FileLog implements Strategy {
 
 					if (commandOperation[1].equals("EXECUTE")) {
 						i = model.getIndexOfShape(oldHex);
-						doCommand = new CmdUpdateHexagon((HexagonAdapter) model.getShapeByIndex(i), (HexagonAdapter) newHex);
+						//doCommand = new CmdUpdateHexagon((HexagonAdapter) model.getShapeByIndex(i), (HexagonAdapter) newHex);
 						controller.doCommand(doCommand);
-						controller.getLog().addElement(((CmdUpdateHexagon) doCommand).getCommandLog());
+						//controller.getLog().addElement(((CmdUpdateHexagon) doCommand).getCommandLog());
 					} else if (commandOperation[1].equals("UNEXECUTE")) {
 						controller.undoCommand();
 					}
@@ -293,7 +293,7 @@ public class FileLog implements Strategy {
 				}
 			} else {
 				frame.getMntmGetLog().setEnabled(false);
-				controller.getLog().addElement("***Completed***");
+				//controller.getLog().addElement("***Completed***");
 			}
 
 		} catch (IOException e) {

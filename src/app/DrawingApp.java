@@ -20,7 +20,7 @@ public class DrawingApp {
 		
 		frame.setVisible(true);
 		frame.setTitle("Nikola Savic IT49/2015");
-		frame.setSize(800, 400);
+		frame.setSize(800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	

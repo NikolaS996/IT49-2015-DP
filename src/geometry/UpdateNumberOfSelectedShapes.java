@@ -10,6 +10,7 @@ public class UpdateNumberOfSelectedShapes implements Observer {
 	@Override
 	public void update(DrawingFrame frame, DrawingModel model, int numberOfSelected, int numberOfUndoCmd,
 			int numberOfRedoCmd) {
+		System.out.println("Hehe " + numberOfSelected);
 		controller = new DrawingController(model, frame);
 		frame.getBtnDelete().setEnabled(numberOfSelected > 0);
 		frame.getBtnModify().setEnabled(numberOfSelected == 1);

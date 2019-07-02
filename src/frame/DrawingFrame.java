@@ -53,6 +53,14 @@ public class DrawingFrame extends JFrame {
 	private DefaultListModel<String> dlmLogList;
 
 	private DrawingView pnlDrawing = new DrawingView();
+	public DrawingView getPnlDrawing() {
+		return pnlDrawing;
+	}
+
+	public void setPnlDrawing(DrawingView pnlDrawing) {
+		this.pnlDrawing = pnlDrawing;
+	}
+
 	private DrawingController controller;
 
 	private JFileChooser jFileChooser;
@@ -66,10 +74,13 @@ public class DrawingFrame extends JFrame {
 	private JMenuItem mntmBringToBack;
 	private JMenuItem mntmGetLog;
 	
-	private JButton btnEdgeColor;
-	private JButton btnAreaColor;
+	private JButton btnBorderColor;
+	private JButton btnInnerColor;	
 	private JButton btnModify;
 	private JButton btnDelete;
+	
+	private Color borderColor = Color.BLACK;
+	private Color innerColor = Color.WHITE;
 
 	//	private boolean pomocniKlik = false;
 	//	private Tacka pocetnaTacka, krajnjaTacka;
@@ -218,7 +229,7 @@ public class DrawingFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.moveByZAxis(mntmBringToBack.getActionCommand());
+				//controller.moveByZAxis(mntmBringToBack.getActionCommand());
 
 			}
 		});
@@ -231,7 +242,7 @@ public class DrawingFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.moveByZAxis(mntmBringToFront.getActionCommand());
+				//controller.moveByZAxis(mntmBringToFront.getActionCommand());
 
 			}
 		});
@@ -243,7 +254,7 @@ public class DrawingFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.moveByZAxis(mntmToBack.getActionCommand());
+				//controller.moveByZAxis(mntmToBack.getActionCommand());
 
 			}
 		});
@@ -256,7 +267,7 @@ public class DrawingFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.moveByZAxis(mntmBringToFront.getActionCommand());
+				//controller.moveByZAxis(mntmBringToFront.getActionCommand());
 
 			}
 		});
@@ -269,7 +280,7 @@ public class DrawingFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.readCommand();
+				//controller.readCommand();
 
 			}
 		});
@@ -590,19 +601,19 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 
-		JButton btnEdgeColor = new JButton("Edge color");
-		btnEdgeColor.addActionListener(new ActionListener() {
+		JButton btnBorderColor = new JButton("Edge color");
+		btnBorderColor.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnEdgeColor.setBackground(controller.pickColor(btnEdgeColor.getBackground()));
-
+				btnBorderColor.setBackground(controller.pickColor(btnBorderColor.getBackground()));
+				setBorderColor(btnBorderColor.getBackground());
 			}
 		});
-		//		btnEdgeColor.addActionListener(new ActionListener() {
+		//		btnBorderColor.addActionListener(new ActionListener() {
 		//			public void actionPerformed(ActionEvent e) {
-		//				btnEdgeColor.setBackground(odabirBoje(btnEdgeColor.getBackground()));
-		//				bojaIvice = btnEdgeColor.getBackground();
+		//				btnBorderColor.setBackground(odabirBoje(btnBorderColor.getBackground()));
+		//				bojaIvice = btnBorderColor.getBackground();
 		//			}
 		//		});
 
@@ -616,25 +627,25 @@ public class DrawingFrame extends JFrame {
 
 			}
 		});
-		pnlShapes.add(btnEdgeColor, "cell 0 6,growx,aligny center");
+		pnlShapes.add(btnBorderColor, "cell 0 6,growx,aligny center");
 
 
-		JButton btnAreaColor = new JButton("Area color");
-		btnAreaColor.addActionListener(new ActionListener() {
+		JButton btnInnerColor = new JButton("Area color");
+		btnInnerColor.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnAreaColor.setBackground(controller.pickColor(btnAreaColor.getBackground()));
-
+				btnInnerColor.setBackground(controller.pickColor(btnInnerColor.getBackground()));
+				setInnerColor(btnInnerColor.getBackground());
 			}
 		});
-		//		btnAreaColor.addActionListener(new ActionListener() {
+		//		btnInnerColor.addActionListener(new ActionListener() {
 		//			public void actionPerformed(ActionEvent e) {
-		//				btnAreaColor.setBackground(odabirBoje(btnAreaColor.getBackground()));
-		//				bojaUnutrasnjosti = btnAreaColor.getBackground();
+		//				btnInnerColor.setBackground(odabirBoje(btnInnerColor.getBackground()));
+		//				bojaUnutrasnjosti = btnInnerColor.getBackground();
 		//			}
 		//		});
-		pnlShapes.add(btnAreaColor, "flowy,cell 0 7,growx,aligny center");
+		pnlShapes.add(btnInnerColor, "flowy,cell 0 7,growx,aligny center");
 
 		JPanel pnlLog = new JPanel();
 		contentPane.add(pnlLog, BorderLayout.SOUTH);
@@ -756,20 +767,20 @@ public class DrawingFrame extends JFrame {
 //		});
 	}
 	
-	public JButton getBtnEdgeColor() {
-		return btnEdgeColor;
+	public JButton getBtnBorderColor() {
+		return btnBorderColor;
 	}
 
-	public void setBtnEdgeColor(JButton btnEdgeColor) {
-		this.btnEdgeColor = btnEdgeColor;
+	public void setBtnBorderColor(JButton btnBorderColor) {
+		this.btnBorderColor = btnBorderColor;
 	}
 
-	public JButton getBtnAreaColor() {
-		return btnAreaColor;
+	public JButton getBtnInnerColor() {
+		return btnInnerColor;
 	}
 
-	public void setBtnAreaColor(JButton btnAreaColor) {
-		this.btnAreaColor = btnAreaColor;
+	public void setBtnInnerColor(JButton btnInnerColor) {
+		this.btnInnerColor = btnInnerColor;
 	}
 
 	public JButton getBtnModify() {
@@ -874,6 +885,22 @@ public class DrawingFrame extends JFrame {
 
 	public void setMntmGetLog(JMenuItem mntmGetLog) {
 		this.mntmGetLog = mntmGetLog;
+	}
+
+	public Color getBorderColor() {
+		return borderColor;
+	}
+
+	public void setBorderColor(Color borderColor) {
+		this.borderColor = borderColor;
+	}
+
+	public Color getInnerColor() {
+		return innerColor;
+	}
+
+	public void setInnerColor(Color innerColor) {
+		this.innerColor = innerColor;
 	}
 	
 //	public Color odabirBoje(Color boja)
